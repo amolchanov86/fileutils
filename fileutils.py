@@ -6,6 +6,20 @@ import sys
 
 import fnmatch
 
+from os.path import join, isfile
+from shutil import copytree
+
+def copyext_keeptree(src_dir, dest_dir, extensions, verbose):
+
+    ext_standard = []
+    for ext in extensions:
+        if ext[0] != '.':
+            ext = '.' + ext
+        ext_standard.append(ext)
+
+    ignore_func = lambda d, files: [f for f in files if isfile(join(d, f)) and not f.endswith(ext_standard)]
+    copytree(src_dir, dest_dir, ignore=ignore_func)
+
 ## Return the list of files in the designated directory with extension provided by the user
 # @param dir Input directory
 # @param ext Extension of the files
