@@ -16,6 +16,7 @@ def copyext_keeptree(src_dir, dest_dir, extensions, verbose):
         if ext[0] != '.':
             ext = '.' + ext
         ext_standard.append(ext)
+    ext_standard = tuple(ext_standard)
 
     ignore_func = lambda d, files: [f for f in files if isfile(join(d, f)) and not f.endswith(ext_standard)]
     copytree(src_dir, dest_dir, ignore=ignore_func)
