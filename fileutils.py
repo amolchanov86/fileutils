@@ -31,6 +31,20 @@ def get_filelist_ext(dir, ext):
             filelist.append(file)
     return filelist
 
+## Checks extension at the end of the name provided
+# @param name Name to check
+# @param ext Extension to check (could be with or without '.', i.e. '.txt' or just 'txt' - it will add '.' automatically)
+def check_extend(name, ext):
+    if name == None or name == '' or ext == None or ext == '':
+        return name
+
+    if ext[0] != '.':
+        ext = '.' + ext
+    if name[-len(ext):] != ext:
+        name += ext
+
+    return name
+
 ## Tests functionality
 def main(argv):
     parser = argparse.ArgumentParser()
