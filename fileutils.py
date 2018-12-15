@@ -10,7 +10,10 @@ from os.path import join, isfile
 from shutil import copytree
 
 def copyext_keeptree(src_dir, dest_dir, extensions, verbose):
-
+    """
+    Copies files from src_dir with provided extensions into the dest_dir, but 
+    keeps the directory tree of the srd_dir
+    """
     ext_standard = []
     for ext in extensions:
         if ext[0] != '.':
@@ -45,24 +48,6 @@ def check_extend(name, ext):
 
     return name
 
-## Tests functionality
-def main(argv):
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument(
-        "dir",
-        help="Input directory"
-    )
-    parser.add_argument(
-        "ext",
-        help="Extension of files to filter"
-    )
-
-    args = parser.parse_args()
-
-    print get_filelist_ext(args.dir, args.ext)
-
-
 ## Returns path,name,extension tuple from name
 # @param name Name you want to split
 # @param keepslash Keep slash at the end of the path or not
@@ -80,9 +65,10 @@ def fileparts(name, keepslash=True):
     return (p,n,e)
 
 
-
 def find_files_ext(dir, extensions):
-
+    """
+    Find files with the provided extensions
+    """
     ext_standard = []
     for ext in extensions:
         if ext[0] != '.':
@@ -96,6 +82,24 @@ def find_files_ext(dir, extensions):
                 matches.append(filename)
 
     return matches
+
+
+## Tests functionality
+def main(argv):
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "dir",
+        help="Input directory"
+    )
+    parser.add_argument(
+        "ext",
+        help="Extension of files to filter"
+    )
+
+    args = parser.parse_args()
+
+    print get_filelist_ext(args.dir, args.ext)
 
 if __name__ == '__main__':
     main(sys.argv)

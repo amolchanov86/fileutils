@@ -1,11 +1,15 @@
 #!/usr/bin/env python
 
+"""
+The script finds files with extensions provided in the src_dir.
+Copies them into the dest_dir keeping the directory tree of the src_dir
+"""
+
 import argparse
 import sys
 import fileutils as fu
 
 
-## Tests functionality
 def main(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -18,7 +22,7 @@ def main(argv):
     )
     parser.add_argument(
         "ext",
-        help="Extension of files to filter"
+        help="Extension of files to filter provided with comma. Example jpg,png"
     )
     parser.add_argument(
         "-v","--verbose",
